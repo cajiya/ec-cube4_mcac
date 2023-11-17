@@ -1,0 +1,12 @@
+{
+  "name": "ec-cube/mailchimpaddcontact",
+  "version": "4.2.2",
+  "description": "MailChimpAddContact",
+  "type": "eccube-plugin",
+  "require": {
+    "ec-cube/plugin-installer": "~0.0.7 || ^2.0"
+  },
+  "extra": {
+    "code": "MailChimpAddContact"
+  }
+}

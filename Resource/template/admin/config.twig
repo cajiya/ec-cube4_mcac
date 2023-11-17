@@ -1,0 +1,95 @@
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['store', 'plugin', 'plugin_list'] %}
+
+{% block title %}MailChimpAddContact{% endblock %}
+{% block sub_title %}プラグイン一覧{% endblock %}
+
+{% form_theme form '@admin/Form/bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block stylesheet %}{% endblock stylesheet %}
+
+{% block javascript %}{% endblock javascript %}
+
+{% block main %}
+    <form role="form" method="post">
+
+        {{ form_widget(form._token) }}
+
+        <div class="c-contentsArea__cols">
+            <div class="c-contentsArea__primaryCol">
+                <div class="c-primaryCol">
+                    <div class="card rounded border-0 mb-4">
+                        <div class="card-header"><span>設定</span></div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-3"><span>Server Prefix名</span><span
+                                            class="badge bg-primary ml-1">必須</span></div>
+                                <div class="col mb-2">
+                                    {{ form_widget(form.server_prefix) }}
+                                    {{ form_errors(form.server_prefix) }}
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-3"><span>API_Key</span><span
+                                            class="badge bg-primary ml-1">必須</span></div>
+                                <div class="col mb-2">
+                                    {{ form_widget(form.api_key) }}
+                                    {{ form_errors(form.api_key) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3"><span>LIST ID</span></div>
+                                <div class="col mb-2">
+                                    <div class="mb-2">
+                                        <a class="btn btn-primary" href="{{ url('mail_chimp_add_contact_admin_config', { 'mode': 'getlists' }) }}">
+                                        リストを取得する</a>
+                                    </div>
+                                    {% for item in lists %}
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text" id="basic-addon3">Audience Name: {{ item.name }}</span>
+                                            <input class="form-control" type="text" value="{{item.id}}" readonly>
+                                        </div>
+                                    {% endfor %}
+
+                                    {{ form_widget(form.list_id) }}
+                                    {{ form_errors(form.list_id) }}
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-conversionArea">
+            <div class="c-conversionArea__container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-6">
+                        <div class="c-conversionArea__leftBlockItem">
+                            <a class="c-baseLink"
+                               href="{{ url('admin_store_plugin') }}">
+                                <i class="fa fa-backward" aria-hidden="true"></i>
+                                <span>プラグイン一覧</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row align-items-center justify-content-end">
+                            <div class="col-auto">
+                                <button class="btn btn-ec-conversion px-5"
+                                        type="submit">登録</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
